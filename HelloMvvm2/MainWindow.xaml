@@ -1,0 +1,28 @@
+﻿<Window x:Class="HelloMvvm2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelloMvvm2"
+        xmlns:carview="clr-namespace:HelloMvvm2.Domain.CarView"
+        xmlns:carmodifier="clr-namespace:HelloMvvm2.Domain.CarModifier"
+        DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl HorizontalContentAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Margin="0">
+            <TabItem Header="Car">
+                <carview:CarView Margin="0"
+                                 CarModels="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+            </TabItem>
+
+            <TabItem Header="Car Modifier">
+                <carmodifier:CarModifierView Margin="0" 
+                                             CarModifierModels="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
