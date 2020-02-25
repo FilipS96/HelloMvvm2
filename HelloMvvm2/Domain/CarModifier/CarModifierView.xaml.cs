@@ -17,8 +17,8 @@ namespace HelloMvvm2.Domain.CarModifier
         public static readonly DependencyProperty CarViewModifierModelProperty =
             DependencyProperty.Register("CarModifierModels", typeof(ObservableCollection<CarModifierModel>), typeof(CarModifierView), new PropertyMetadata(CarModifierModelsPropertyChanged));
 
-        public static readonly DependencyProperty CarViewModelProperty =
-           DependencyProperty.Register("CarModels", typeof(ObservableCollection<CarModel>), typeof(CarModifierView), new PropertyMetadata(CarViewModelsPropertyChanged));
+        //public static readonly DependencyProperty CarViewModelProperty =
+        //   DependencyProperty.Register("CarModels", typeof(ObservableCollection<CarModel>), typeof(CarModifierView), new PropertyMetadata(CarViewModelsPropertyChanged));
 
         public CarModifierView()
         {
@@ -34,39 +34,39 @@ namespace HelloMvvm2.Domain.CarModifier
             set => SetValue(CarViewModifierModelProperty, value);
         }
 
-        public ObservableCollection<CarModel> CarModels
-        {
-            get => (ObservableCollection<CarModel>)GetValue(CarViewModelProperty);
-            set => SetValue(CarViewModelProperty, value);
-        }
+        //public ObservableCollection<CarModel> CarModels
+        //{
+        //    get => (ObservableCollection<CarModel>)GetValue(CarViewModelProperty);
+        //    set => SetValue(CarViewModelProperty, value);
+        //}
 
         private static void CarModifierModelsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue != null)
             {
                 var carModifierModels = (ObservableCollection<CarModifierModel>)e.NewValue;
-                ((CarModifierViewModel)((CarModifierView)d).DataContext).CarModifierModels = carModifierModels;
-                ((CarModifierViewModel)((CarModifierView)d).DataContext).CarModifierModels.CollectionChanged += CarModifierModelsCollectionChanged;
+                ((CarModifierViewModel)((CarModifierView)d).DataContext).Cmms = carModifierModels;
+                ((CarModifierViewModel)((CarModifierView)d).DataContext).Cmms.CollectionChanged += CarModifierModelsCollectionChanged;
             }
         }
 
-        private static void CarViewModelsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.NewValue != null)
-            {
-                var carModels = (ObservableCollection<CarModel>)e.NewValue;
-                ((CarViewModel)((CarModifierView)d).DataContext).CarModels = carModels;
-                ((CarViewModel)((CarModifierView)d).DataContext).CarModels.CollectionChanged += CarModelsCollectionChanged;
-            }
-        }
+        //private static void CarViewModelsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (e.NewValue != null)
+        //    {
+        //        var carModels = (ObservableCollection<CarModel>)e.NewValue;
+        //        ((CarViewModel)((CarModifierView)d).DataContext).CarModels = carModels;
+        //        ((CarViewModel)((CarModifierView)d).DataContext).CarModels.CollectionChanged += CarModelsCollectionChanged;
+        //    }
+        //}
 
         private static void CarModifierModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
         }
 
-        private static void CarModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-        }
+        //private static void CarModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //}
 
         public void OnLoaded(object sender, RoutedEventArgs e)
         {

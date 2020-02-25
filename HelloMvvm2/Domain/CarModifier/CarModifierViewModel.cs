@@ -13,18 +13,18 @@ namespace HelloMvvm2.Domain.CarModifier
         private string _previouslySelectedCar;
         private string _previouslySelectedModel;
 
-        private Car _car;
-        private CarModel _carModel;
+        private Car _c;
+        private CarModel _cm;
+        private CarViewModel _cvm;
+        private ObservableCollection<CarModifierModel> _cmms;
+
         private CarColorModel _selectedColor;
         private CarModifierModel _selectedYear;
-        private CarViewModel _carViewModelClass;
-
-        private ObservableCollection<CarModifierModel> _modifierModels;
 
         [DesignOnly(true)]
         public CarModifierViewModel()
         {
-            CarModifierModels = new ObservableCollection<CarModifierModel>
+            Cmms = new ObservableCollection<CarModifierModel>
             {
                CarModifierModel.Create(2000, new ObservableCollection<CarColorModel>()
                {
@@ -64,6 +64,15 @@ namespace HelloMvvm2.Domain.CarModifier
             };
 
             AddCompleteCarCommand = new DelegateCommand(AddCompleteCarExecuted, AddCompleteCarCanExecute);
+
+
+            Cvm = new CarViewModel
+            {
+                SelectedCar = new Car(),
+                SelectedModel = new CarModel()
+            };
+            Cvm.MySelectedCar = new string(Cvm.SelectedCar.Name);
+            Cvm.MySelectedModel = new string(Cvm.SelectedModel.Name);
         }
 
         public DelegateCommand AddCompleteCarCommand { get; set; }
@@ -78,18 +87,6 @@ namespace HelloMvvm2.Domain.CarModifier
         {
             get => _previouslySelectedModel;
             set => SetProperty(ref _previouslySelectedModel, value);
-        }
-
-        public Car CarClass
-        {
-            get => _car;
-            set => SetProperty(ref _car, value);
-        }
-
-        public CarModel CarModelClass
-        {
-            get => _carModel;
-            set => SetProperty(ref _carModel, value);
         }
 
         public CarColorModel SelectedColor
@@ -108,35 +105,41 @@ namespace HelloMvvm2.Domain.CarModifier
             }
         }
 
-        public CarViewModel CarViewModelClass
+        public CarViewModel Cvm
         {
-            get => _carViewModelClass;
-            set => SetProperty(ref _carViewModelClass, value);
+            get => _cvm;
+            set => SetProperty(ref _cvm, value);
         }
 
-        public ObservableCollection<CarModifierModel> CarModifierModels
+        public ObservableCollection<CarModifierModel> Cmms
         {
-            get => _modifierModels;
-            set => SetProperty(ref _modifierModels, value);
+            get => _cmms;
+            set => SetProperty(ref _cmms, value);
         }
-        
+
         public void LoadCarAndModel()
         {
-            CarViewModelClass = new CarViewModel
-            {
-                SelectedCar = new Car(),
-                SelectedModel = new CarModel()
-            };
+            //var car = new Car
+            //{
+            //    Name = new string(Cvm.MySelectedCar)
+            //};
+            //var carModel = new CarModel
+            //{
+            //    Name = new string(Cvm.MySelectedModel)
+            //};
 
-            PreviouslySelectedCar = CarViewModelClass?.SelectedCar?.Name;
-            PreviouslySelectedModel = CarViewModelClass?.SelectedModel?.Name;
+            //Cvm.MySelectedCar = new string(Cvm.SelectedCar.Name);
+            //Cvm.MySelectedModel = new string(Cvm.SelectedModel.Name);
+
+            PreviouslySelectedCar = Cvm.SelectedCar.Name;
+            PreviouslySelectedModel = Cvm.SelectedModel.Name;
         }
 
         private void AddCompleteCarExecuted(object model)
         {
             if (AddCompleteCarCanExecute(true))
             {
-                CarModifierModel.Create(SelectedYear.CarYear, SelectedColor, CarClass, CarModelClass); //CarClass & CarModelClass ska ta in det valda objektet från tillverkare och model.
+                CarModifierModel.Create(SelectedYear.CarYear, SelectedColor, Cvm.SelectedCar, Cvm.SelectedModel); //CarClass & CarModelClass ska ta in det valda objektet från tillverkare och model.
             }
         }
 

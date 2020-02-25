@@ -25,9 +25,9 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
                 <Run Text="Your previously selected car is: "/>
-                <Run Text="{Binding CarViewModelClass.SelectedCar.Name}"/>
+                <Run Text="{Binding PreviouslySelectedCar}"/>
                 <Run Text=" "/>
-                <Run Text="{Binding CarViewModelClass.SelectedModel.Name}"/>
+                <Run Text="{Binding PreviouslySelectedModel}"/>
             </TextBlock>
         </Grid>
 
@@ -41,7 +41,7 @@
                   Margin="0 20 0 0"
                   MinWidth="190"
                   Height="40"
-                  ItemsSource="{Binding CarModifierModels}"
+                  ItemsSource="{Binding Cmms}"
                   SelectedItem="{Binding SelectedYear}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

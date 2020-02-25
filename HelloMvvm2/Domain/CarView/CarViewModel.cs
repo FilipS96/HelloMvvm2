@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -12,6 +12,9 @@ namespace HelloMvvm2.Domain.CarView
     {
         private string _enteredModel;
         private string _enteredCar;
+
+        private string _mySelectedModel;
+        private string _mySelectedCar;
 
         private Car _selectedCar;
         private CarModel _selectedModel;
@@ -98,16 +101,36 @@ namespace HelloMvvm2.Domain.CarView
             set => SetProperty(ref _enteredCar, value);
         }
 
+        public string MySelectedModel
+        {
+            get => _mySelectedModel;
+            set => SetProperty(ref _mySelectedModel, value);
+        }
+
+        public string MySelectedCar
+        {
+            get => _mySelectedCar;
+            set => SetProperty(ref _mySelectedCar, value);
+        }
+
         public Car SelectedCar
         {
             get => _selectedCar;
-            set => SetProperty(ref _selectedCar, value);
+            set
+            {
+                SetProperty(ref _selectedCar, value);
+                MySelectedCar = SelectedCar.Name;
+            }
         }
 
         public CarModel SelectedModel
         {
             get => _selectedModel;
-            set => SetProperty(ref _selectedModel, value);
+            set
+            {
+                SetProperty(ref _selectedModel, value);
+                MySelectedModel = SelectedModel.Name;
+            }
         }
 
         public ObservableCollection<Car> Cars

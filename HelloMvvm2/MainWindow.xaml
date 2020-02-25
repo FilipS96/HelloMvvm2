@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:HelloMvvm2"
         xmlns:carview="clr-namespace:HelloMvvm2.Domain.CarView"
         xmlns:carmodifier="clr-namespace:HelloMvvm2.Domain.CarModifier"
+        xmlns:random="clr-namespace:HelloMvvm2.Domain.RandomView"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
         d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
@@ -22,6 +23,11 @@
             <TabItem Header="Car Modifier">
                 <carmodifier:CarModifierView Margin="0" 
                                              CarModifierModels="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+            </TabItem>
+
+            <TabItem Header="Random">
+                <random:RandomView Margin="0"
+                                   RandomModels="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
             </TabItem>
         </TabControl>
     </Grid>
