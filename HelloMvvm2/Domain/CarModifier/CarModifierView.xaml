@@ -25,7 +25,7 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center">
                 <Run Text="Your previously selected car is: "/>
-                <Run Text="{Binding PreviouslySelectedCar}"/>
+                <Run Text="{Binding Cvm.SelectedCar.Name}"/>
                 <Run Text=" "/>
                 <Run Text="{Binding PreviouslySelectedModel}"/>
             </TextBlock>

@@ -34,7 +34,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name, Mode=TwoWay}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

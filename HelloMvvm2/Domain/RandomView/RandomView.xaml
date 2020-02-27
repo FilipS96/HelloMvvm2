@@ -17,13 +17,19 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Row="0" Height="1" 
+        <Rectangle Grid.Row="0"
+                   Height="1" 
                    Stroke="Black" 
                    VerticalAlignment="Center"/>
         <Rectangle Grid.Row="0" 
-                   Width="2" 
+                   Width="1" 
                    Stroke="Red" 
                    HorizontalAlignment="Right"/>
+        <Rectangle Grid.Row="1"
+                   Grid.Column="1"
+                   Height="1"
+                   Stroke="Red" 
+                   VerticalAlignment="Top"/>
 
         <Grid Grid.Row="0"
               Grid.Column="0"
@@ -54,6 +60,7 @@
                            FontWeight="Bold">
                         Value:
                     </Label>
+
                     <TextBox Text="{Binding RndNumber}"
                              DockPanel.Dock="Right"
                              Margin="0" 
@@ -64,6 +71,7 @@
                              IsHitTestVisible="False"
                              Width="40"
                              Height="40"/>
+
                     <Slider Value="{Binding RndNumber}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
@@ -73,6 +81,7 @@
                             Maximum="100"
                             TickPlacement="BottomRight"
                             TickFrequency="5"/>
+
                 </DockPanel>
 
             </StackPanel>
@@ -108,7 +117,7 @@
                            Stroke="Black" 
                            HorizontalAlignment="Right"/>
                 <Rectangle Grid.Column="2"
-                           Width="2" 
+                           Width="1" 
                            Stroke="Red" 
                            HorizontalAlignment="Right"/>
                 <Rectangle Grid.Column="0"
@@ -117,8 +126,7 @@
                            Stroke="Black" 
                            VerticalAlignment="Bottom"/>
 
-                <ListView Grid.Row="0"
-                          Grid.Column="0"
+                <ListView Grid.Column="0"
                           Margin="5"
                           ItemsSource="{Binding MyModel.ListOne}">
                     <ListView.ItemContainerStyle>
@@ -129,7 +137,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="--One--"
-                                            Width="90"></GridViewColumn>
+                                            Width="90"/>
                         </GridView>
                     </ListView.View>
                     <ListView.ItemTemplate>
@@ -154,16 +162,42 @@
                           Height="40"
                           VerticalAlignment="Top"
                           VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
                           IsEditable="True"
                           IsReadOnly="True"
                           Text="--Two--"
-                          ItemsSource="{Binding MyModel.ListTwo, UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBox.ItemTemplate>
+                          ItemsSource="{Binding MyModel.ListTwo, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <ListView Grid.Column="2"
+                          Margin="5"
+                          ItemsSource="{Binding MyModel.ListThree}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="--Three--"
+                                            Width="90"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="--Two--"/>
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" MinHeight="40"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="0"
+                                           TextAlignment="Center"
+                                           Text="{Binding UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
 
             <Rectangle Grid.Row="1"
@@ -171,16 +205,34 @@
                        Stroke="Black" 
                        VerticalAlignment="Bottom"/>
             <Rectangle Grid.Row="1"
-                       Width="2" 
+                       Width="1" 
                        Stroke="Red" 
                        HorizontalAlignment="Right"/>
 
-            <TextBlock Grid.Row="1"
-                       Text="Values"
-                       FontWeight="Bold"
-                       FontSize="16"
-                       TextAlignment="Center"
-                       Margin="0"/>
+            <Grid Grid.Row="1"
+                  Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.66*"/>
+                    <ColumnDefinition Width="0.33*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0"
+                           Width="1"
+                           Stroke="Black" 
+                           HorizontalAlignment="Right"/>
+
+                <TextBlock Grid.Column="0"
+                           Text="Values"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           TextAlignment="Center"
+                           Margin="0"/>
+                <TextBlock Grid.Column="1"
+                           Text="Buttons"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           TextAlignment="Center"
+                           Margin="0"/>
+            </Grid>
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -204,7 +256,7 @@
                            HorizontalAlignment="Right"/>
                 <Rectangle Grid.Column="2" 
                            Grid.RowSpan="2"
-                           Width="2" 
+                           Width="1" 
                            Stroke="Red" 
                            HorizontalAlignment="Right"/>
 
@@ -241,17 +293,67 @@
                          IsHitTestVisible="False"
                          Width="50"
                          Height="45"/>
-                <TextBox Grid.Row="1" Grid.Column="2" 
-                         Text="{Binding MyModel.RndThree}"
-                         TextAlignment="Center"
-                         VerticalAlignment="Center"
-                         VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         HorizontalContentAlignment="Center"
-                         IsHitTestVisible="False"
-                         Width="50"
-                         Height="45"/>
+
+                <Grid Grid.Row="1" Grid.Column="2"
+                      Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0"
+                            Margin="7.5"
+                            Command="{Binding DataContext.AddRandomCmd, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                            CommandParameter="{Binding}">
+                        <TextBlock TextAlignment="Center"
+                                   Text="Add"/>
+                    </Button>
+                    <Button Grid.Row="0" Grid.Column="1"
+                            Margin="7.5"
+                            Command="{Binding DataContext.ClearRandomCmd, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                            CommandParameter="{Binding}">
+                        <TextBlock TextAlignment="Center"
+                                   Text="Clear"/>
+                    </Button>
+                </Grid>
+
             </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="0"
+              Grid.Column="1"
+              Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="5"
+                      Height="40"
+                      VerticalAlignment="Top"
+                      VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Center"
+                      IsEditable="True"
+                      IsReadOnly="True"
+                      Text="--Select a List--" 
+                      ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ListView Grid.Row="0"
+                      Grid.RowSpan="2"
+                      Grid.Column="0"
+                      Margin="5"
+                      ItemsSource="{Binding}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding }"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
         </Grid>
     </Grid>

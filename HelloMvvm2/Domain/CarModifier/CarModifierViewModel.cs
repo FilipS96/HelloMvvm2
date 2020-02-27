@@ -13,8 +13,6 @@ namespace HelloMvvm2.Domain.CarModifier
         private string _previouslySelectedCar;
         private string _previouslySelectedModel;
 
-        private Car _c;
-        private CarModel _cm;
         private CarViewModel _cvm;
         private ObservableCollection<CarModifierModel> _cmms;
 
@@ -68,11 +66,14 @@ namespace HelloMvvm2.Domain.CarModifier
 
             Cvm = new CarViewModel
             {
-                SelectedCar = new Car(),
-                SelectedModel = new CarModel()
+                MySelectedCar = "",
+                MySelectedModel = "",
+                SelectedCar = new Car(""),
+                SelectedModel = new CarModel("")
             };
-            Cvm.MySelectedCar = new string(Cvm.SelectedCar.Name);
-            Cvm.MySelectedModel = new string(Cvm.SelectedModel.Name);
+
+            //Cvm.MySelectedCar = new string(Cvm.SelectedCar.Name);
+            //Cvm.MySelectedModel = new string(Cvm.SelectedModel.Name);
         }
 
         public DelegateCommand AddCompleteCarCommand { get; set; }
