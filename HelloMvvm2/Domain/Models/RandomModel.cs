@@ -6,8 +6,11 @@ namespace HelloMvvm2.Domain.Models
 {
     public class RandomModel : ViewModelBase
     {
+        private ListModel _myListModel;
+
         private Random _rndNumber;
 
+        private string _listNameString;
         private int _rndOne;
         private int _rndTwo;
         private int _rndThree;
@@ -15,23 +18,38 @@ namespace HelloMvvm2.Domain.Models
         private ObservableCollection<int> _listOne;
         private ObservableCollection<int> _listTwo;
         private ObservableCollection<int> _listThree;
+        private ObservableCollection<ListModel> _myListModels;
 
-        private ObservableCollection<ListModel> _stringListOne;
-        private ObservableCollection<ListModel> _stringListTwo;
-
-        public RandomModel(ObservableCollection<ListModel> models)
+        public RandomModel()
         {
-            StringListOne = models;
         }
 
-        public static RandomModel Create(ObservableCollection<ListModel> models)
-            => new RandomModel(models);
+        public RandomModel(string listNameString, ObservableCollection<ListModel> myListModels)
+        {
+            ListNameString = listNameString;
+            MyListModels = myListModels;
+        }
+
+        public static RandomModel Create(string listNameString, ObservableCollection<ListModel> myListModels)
+            => new RandomModel(listNameString, myListModels);
+
+        public ListModel MyListModel
+        {
+            get => _myListModel;
+            set => SetProperty(ref _myListModel, value);
+        }
+
         public Random RndNumber
         {
             get => _rndNumber;
             set => SetProperty(ref _rndNumber, value);
         }
 
+        public string ListNameString
+        {
+            get => _listNameString;
+            set => SetProperty(ref _listNameString, value);
+        }
         public int RndOne
         {
             get => _rndOne;
@@ -63,16 +81,10 @@ namespace HelloMvvm2.Domain.Models
             get => _listThree;
             set => SetProperty(ref _listThree, value);
         }
-
-        public ObservableCollection<ListModel> StringListOne
+        public ObservableCollection<ListModel> MyListModels
         {
-            get => _stringListOne;
-            set => SetProperty(ref _stringListOne, value);
-        }
-        public ObservableCollection<ListModel> StringListTwo
-        {
-            get => _stringListTwo;
-            set => SetProperty(ref _stringListTwo, value);
+            get => _myListModels;
+            set => SetProperty(ref _myListModels, value);
         }
     }
 }

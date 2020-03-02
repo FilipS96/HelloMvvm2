@@ -35,8 +35,8 @@ namespace HelloMvvm2.Domain.RandomView
             if (e.NewValue != null)
             {
                 var randomModels = (ObservableCollection<RandomModel>) e.NewValue;
-                ((RandomViewModel)((RandomView) d).DataContext).MyModels = randomModels;
-                ((RandomViewModel) ((RandomView) d).DataContext).MyModels.CollectionChanged += RandomModelsCollectionChanged;
+                ((RandomViewModel)((RandomView) d).DataContext).MyRandomModels = randomModels;
+                ((RandomViewModel) ((RandomView) d).DataContext).MyRandomModels.CollectionChanged += RandomModelsCollectionChanged;
             }
         }
 

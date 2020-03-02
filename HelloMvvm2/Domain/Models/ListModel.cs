@@ -5,16 +5,19 @@ namespace HelloMvvm2.Domain.Models
 {
     public class ListModel : ViewModelBase
     {
-        private string _value;
+        private int _value;
 
-        public ListModel(string value)
+        public ListModel()
+        {
+        }
+        public ListModel(int value)
         {
             Value = value;
         }
-        public static ListModel Create(string value)
+        public static ListModel Create(int value)
             => new ListModel(value);
 
-        public string Value
+        public int Value
         {
             get => _value;
             set => SetProperty(ref _value, value);

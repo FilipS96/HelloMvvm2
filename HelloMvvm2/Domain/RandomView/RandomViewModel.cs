@@ -11,18 +11,21 @@ namespace HelloMvvm2.Domain.RandomView
     public class RandomViewModel : ViewModelBase, IRandomViewModel
     {
         private int _rndNumber;
-        
+
         private DispatcherTimer _timer;
 
-        private RandomModel _myModel;
-        private ListModel _listModel;
+        private ListModel _selectedListModel;
+        private RandomModel _selectedRandomModel;
 
-        private ObservableCollection<RandomModel> _myModels;
-        
+        private ObservableCollection<ListModel> _myListModels;
+        private ObservableCollection<RandomModel> _myRandomModels;
+
+        public RandomModel _rndModel;
+
         [DesignOnly(true)]
         public RandomViewModel()
         {
-            MyModel = new RandomModel()
+            SelectedRandomModel = new RandomModel()
             {   //Rnd one, two & three kan vara en Rnd, Men då behöver man sätta .next i varje AddToList innan man lägger det i listan. Se exempel nedan.
                 RndNumber = new Random(),
                 RndOne = new int(),
@@ -32,11 +35,13 @@ namespace HelloMvvm2.Domain.RandomView
                 ListTwo = new ObservableCollection<int>(),
                 ListThree = new ObservableCollection<int>(),
             };
-            ListModel = new ListModel();
+            SelectedListModel = new ListModel();
 
             RandomizeNumber = new DelegateCommand(RandomizeNumberExecuted, RandomizeNumberCanExecute);
             AddRandomCmd = new DelegateCommand(AddRandomCmdExecuted, AddRandomCmdCanExecute);
             ClearRandomCmd = new DelegateCommand(ClearRandomCmdExecuted, ClearRandomCmdCanExecute);
+
+            FillListsWithData();
         }
 
         public DelegateCommand RandomizeNumber { get; set; }
@@ -49,21 +54,31 @@ namespace HelloMvvm2.Domain.RandomView
             set => SetProperty(ref _rndNumber, value);
         }
 
-        public RandomModel MyModel
+        public ListModel SelectedListModel
         {
-            get => _myModel;
-            set => SetProperty(ref _myModel, value);
+            get => _selectedListModel;
+            set => SetProperty(ref _selectedListModel, value);
+        }
+        public RandomModel SelectedRandomModel
+        {
+            get => _selectedRandomModel;
+            set => SetProperty(ref _selectedRandomModel, value);
+        }
+        public RandomModel RndModel
+        {
+            get => _rndModel;
+            set => SetProperty(ref _rndModel, value);
         }
 
-        public ListModel ListModel
+        public ObservableCollection<ListModel> MyListModels
         {
-            get => _listModel;
-            set => SetProperty(ref _listModel, value);
+            get => _myListModels;
+            set => SetProperty(ref _myListModels, value);
         }
-        public ObservableCollection<RandomModel> MyModels
+        public ObservableCollection<RandomModel> MyRandomModels
         {
-            get => _myModels;
-            set => SetProperty(ref _myModels, value);
+            get => _myRandomModels;
+            set => SetProperty(ref _myRandomModels, value);
         }
 
         private async Task LoadRandomsAndStartTimer()
@@ -71,44 +86,66 @@ namespace HelloMvvm2.Domain.RandomView
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             _timer.Tick -= LoadRandomNumbers;
             _timer.Tick += LoadRandomNumbers;
-
-            _timer.Tick -= FillListsWithData;
-            _timer.Tick += FillListsWithData;
-            
             _timer.Start();
         }
         private void LoadRandomNumbers(object sender, EventArgs e)
         {
-            MyModel.RndOne = MyModel.RndNumber.Next(0, 100);
-            MyModel.RndTwo = MyModel.RndNumber.Next(0, 100);
+            SelectedRandomModel.RndOne = SelectedRandomModel.RndNumber.Next(0, 100);
+            SelectedRandomModel.RndTwo = SelectedRandomModel.RndNumber.Next(0, 100);
 
             AddToList();
         }
-
-        private void FillListsWithData(object sender, EventArgs e)
-        {
-            RandomModel.Create(new ObservableCollection<ListModel>(ListModel.Create()))
-        }
         public void AddToList()
         {
-            MyModel.ListOne.Add(MyModel.RndOne);
-            MyModel.ListTwo.Add(MyModel.RndTwo);
+            SelectedRandomModel.ListOne.Add(SelectedRandomModel.RndOne);
+            SelectedRandomModel.ListTwo.Add(SelectedRandomModel.RndTwo);
         }
 
         //public void Example()
         //{
-        //    MyModel.Rnd = MyModel.RndNumber.Next(0, 100);
-        //    MyModel.ListOne.Add(MyModel.Rnd);
+        //    SelectedRandomModel.Rnd = SelectedRandomModel.RndNumber.Next(0, 100);
+        //    SelectedRandomModel.ListOne.Add(SelectedRandomModel.Rnd);
 
-        //    MyModel.Rnd = MyModel.RndNumber.Next(0, 100);
-        //    MyModel.ListTwo.Add(MyModel.Rnd);
+        //    SelectedRandomModel.Rnd = SelectedRandomModel.RndNumber.Next(0, 100);
+        //    SelectedRandomModel.ListTwo.Add(SelectedRandomModel.Rnd);
         //}
+
+        private void FillListsWithData()
+        {
+            MyRandomModels = new ObservableCollection<RandomModel>
+            {
+                RandomModel.Create("List One",
+                    new ObservableCollection<ListModel>
+                    {
+                        ListModel.Create(100),
+                        ListModel.Create(110),
+                        ListModel.Create(120),
+                        ListModel.Create(130),
+                        ListModel.Create(140),
+                        ListModel.Create(150),
+                        ListModel.Create(160),
+                        ListModel.Create(170)
+                    }),
+                RandomModel.Create("List Two",
+                    new ObservableCollection<ListModel>
+                    {
+                        ListModel.Create(200),
+                        ListModel.Create(210),
+                        ListModel.Create(220),
+                        ListModel.Create(230),
+                        ListModel.Create(240),
+                        ListModel.Create(250),
+                        ListModel.Create(260),
+                        ListModel.Create(270)
+                    })
+            };
+        }
 
         private void RandomizeNumberExecuted(object model)
         {
             if (RandomizeNumberCanExecute(true))
             {
-                RndNumber = MyModel.RndNumber.Next(0, 100);
+                RndNumber = SelectedRandomModel.RndNumber.Next(0, 100);
             }
         }
         private bool RandomizeNumberCanExecute(object model)
@@ -120,9 +157,9 @@ namespace HelloMvvm2.Domain.RandomView
         {
             if (AddRandomCmdCanExecute(true))
             {
-                MyModel.RndThree = MyModel.RndNumber.Next(0, 100);
+                SelectedRandomModel.RndThree = SelectedRandomModel.RndNumber.Next(0, 100);
 
-                MyModel.ListThree.Add(MyModel.RndThree);
+                SelectedRandomModel.ListThree.Add(SelectedRandomModel.RndThree);
             }
         }
         private bool AddRandomCmdCanExecute(object model)
@@ -134,7 +171,7 @@ namespace HelloMvvm2.Domain.RandomView
         {
             if (ClearRandomCmdCanExecute(true))
             {
-                MyModel.ListThree.Clear();
+                SelectedRandomModel.ListThree.Clear();
             }
         }
         private bool ClearRandomCmdCanExecute(object model)

@@ -28,7 +28,7 @@ namespace HelloMvvm2.Domain.CarView
             Cars = new ObservableCollection<Car>
             {
                 Car.Create("Audi",
-                    new ObservableCollection<CarModel>()
+                    new ObservableCollection<CarModel>
                     {
                         CarModel.Create("A1"),
                         CarModel.Create("A2"),
@@ -37,7 +37,7 @@ namespace HelloMvvm2.Domain.CarView
                         CarModel.Create("A5")
                     }),
                 Car.Create("Mercedes",
-                    new ObservableCollection<CarModel>()
+                    new ObservableCollection<CarModel>
                     {
                         CarModel.Create("A-Class"),
                         CarModel.Create("B-Class"),
@@ -46,7 +46,7 @@ namespace HelloMvvm2.Domain.CarView
                         CarModel.Create("S-Class")
                     }),
                 Car.Create("BMW",
-                    new ObservableCollection<CarModel>()
+                    new ObservableCollection<CarModel>
                     {
                         CarModel.Create("1-Serie"),
                         CarModel.Create("2-Serie"),
@@ -55,7 +55,7 @@ namespace HelloMvvm2.Domain.CarView
                         CarModel.Create("5-Serie")
                     }),
                 Car.Create("Volkswagen",
-                    new ObservableCollection<CarModel>()
+                    new ObservableCollection<CarModel>
                     {
                         CarModel.Create("Golf"),
                         CarModel.Create("Passat"),
@@ -64,7 +64,7 @@ namespace HelloMvvm2.Domain.CarView
                         CarModel.Create("Up!")
                     }),
                 Car.Create("Volvo",
-                    new ObservableCollection<CarModel>()
+                    new ObservableCollection<CarModel>
                     {
                         CarModel.Create("V60"),
                         CarModel.Create("V70"),

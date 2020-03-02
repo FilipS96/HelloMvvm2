@@ -128,7 +128,7 @@
 
                 <ListView Grid.Column="0"
                           Margin="5"
-                          ItemsSource="{Binding MyModel.ListOne}">
+                          ItemsSource="{Binding SelectedRandomModel.ListOne}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -166,11 +166,11 @@
                           IsEditable="True"
                           IsReadOnly="True"
                           Text="--Two--"
-                          ItemsSource="{Binding MyModel.ListTwo, UpdateSourceTrigger=PropertyChanged}"/>
+                          ItemsSource="{Binding SelectedRandomModel.ListTwo, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <ListView Grid.Column="2"
                           Margin="5"
-                          ItemsSource="{Binding MyModel.ListThree}">
+                          ItemsSource="{Binding SelectedRandomModel.ListThree}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -274,7 +274,7 @@
                            Text="--Three--"/>
 
                 <TextBox Grid.Row="1" Grid.Column="0" 
-                         Text="{Binding MyModel.RndOne}"
+                         Text="{Binding SelectedRandomModel.RndOne}"
                          TextAlignment="Center"
                          VerticalAlignment="Center"
                          VerticalContentAlignment="Center"
@@ -284,7 +284,7 @@
                          Width="50" 
                          Height="45"/>
                 <TextBox Grid.Row="1" Grid.Column="1" 
-                         Text="{Binding MyModel.RndTwo}"
+                         Text="{Binding SelectedRandomModel.RndTwo}"
                          TextAlignment="Center"
                          VerticalAlignment="Center"
                          VerticalContentAlignment="Center"
@@ -332,7 +332,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Row="0"
-                      Grid.Column="1"
+                      Grid.Column="0"
                       Margin="5"
                       Height="40"
                       VerticalAlignment="Top"
@@ -341,21 +341,46 @@
                       IsEditable="True"
                       IsReadOnly="True"
                       Text="--Select a List--" 
-                      ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"/>
+                      ItemsSource="{Binding MyRandomModels}"
+                      SelectedItem="{Binding RndModel}"> 
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ListNameString}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <ListView Grid.Row="0"
+                      Grid.Column="1"
                       Grid.RowSpan="2"
-                      Grid.Column="0"
                       Margin="5"
-                      ItemsSource="{Binding}">
+                      ItemsSource="{Binding RndModel.MyListModels}"
+                      SelectedItem="{Binding SelectedListModel}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding }"/>
+                        <TextBlock Text="{Binding Value}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="5"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Text="Selected value:" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="5"
+                       TextAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       FontWeight="Bold"
+                       FontSize="24"
+                       Text="{Binding SelectedListModel.Value}"/>
         </Grid>
+
+
     </Grid>
 </UserControl>
  
