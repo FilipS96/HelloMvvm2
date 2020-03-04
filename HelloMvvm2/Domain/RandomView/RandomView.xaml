@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HelloMvvm2.Domain.RandomView"
+             xmlns:chartView="clr-namespace:HelloMvvm2.Domain.RandomViewGraph"
              DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RandomViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
@@ -52,7 +53,7 @@
                         HorizontalAlignment="Center"
                         Orientation="Vertical">
                 <DockPanel VerticalAlignment="Center" 
-                           Margin="100"
+                           Margin="0"
                            Background="CornflowerBlue">
                     <Label DockPanel.Dock="Top" 
                            HorizontalAlignment="Center"
@@ -380,6 +381,10 @@
                        Text="{Binding SelectedListModel.Value}"/>
         </Grid>
 
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+           <chartView:RandomViewGraphView></chartView:RandomViewGraphView>
+        </Grid>
 
     </Grid>
 </UserControl>
