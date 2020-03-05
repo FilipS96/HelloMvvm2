@@ -11,19 +11,19 @@ namespace HelloMvvm2.Selectors
 
         public ChartSeriesDescriptor PointSeriesDescriptor { get; set; }
 
-        public override ChartSeriesDescriptor SelectDescriptor(ChartSeriesProvider provider, object context)
-        {
-            var seriesModel = (TestRunSeries)context;
+        //public override ChartSeriesDescriptor SelectDescriptor(ChartSeriesProvider provider, object context)
+        //{
+        //    var seriesModel = (TestRunSeries)context;
 
-            switch (seriesModel.SeriesType)
-            {
-                case SeriesTypeEnum.Line:
-                    return CategoricalSeriesDescriptor;
-                case SeriesTypeEnum.Point:
-                    return PointSeriesDescriptor;
-                default:
-                    return CategoricalSeriesDescriptor;
-            }
-        }
+        //    switch (seriesModel.SeriesType)
+        //    {
+        //        case SeriesTypeEnum.Line:
+        //            return CategoricalSeriesDescriptor;
+        //        case SeriesTypeEnum.Point:
+        //            return PointSeriesDescriptor;
+        //        default:
+        //            return CategoricalSeriesDescriptor;
+        //    }
+        //}
     }
 }

@@ -1,19 +1,32 @@
-﻿<UserControl x:Class="HelloMvvm2.Domain.RandomViewGraph.RandomViewGraphView"
+﻿<UserControl x:Class="HelloMvvm2.Domain.RandomViewChart.RandomViewChartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HelloMvvm2.Domain.RandomViewGraph"
+             xmlns:local="clr-namespace:HelloMvvm2.Domain.RandomViewChart"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewChartView}"
+             d:DataContext="{d:DesignInstance Type=local:RandomViewChartView, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <telerik:RadCartesianChart x:Name="testChart"
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.75*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+        <telerik:RadCartesianChart Grid.Column="0"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   x:Name="testChart"
                                    Background="White"
                                    Margin="0">
             <!-- Resources -->
             <telerik:RadCartesianChart.Resources>
-                <DataTemplate x:Key="dataTemplate">
+                <DataTemplate x:Key="DataTemplate">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -41,31 +54,32 @@
 
             <!--Vertical Axis-->
             <telerik:RadCartesianChart.VerticalAxis>
-                <telerik:LinearAxis x:Name="verticalAxis"
+                <telerik:LinearAxis x:Name="VerticalAxis"
                                     Title="Vertical Axis"
                                     SmartLabelsMode="SmartStep"/>
             </telerik:RadCartesianChart.VerticalAxis>
 
             <!--Horizontal Axis-->
             <telerik:RadCartesianChart.HorizontalAxis>
-                <telerik:CategoricalAxis SmartLabelsMode="SmartStep"
+                <telerik:CategoricalAxis x:Name="HorizontalAxis"
+                                         SmartLabelsMode="SmartStep"
                                          Title="Horizontal Axis"
                                          PlotMode="OnTicks"
                                          LastLabelVisibility="Clip"/>
             </telerik:RadCartesianChart.HorizontalAxis>
 
             <!--Annotations-->
-            
-            <telerik:RadCartesianChart.Series>
-                <telerik:AreaSeries>
-                    <telerik:AreaSeries.DataPoints>
-                        <telerik:CategoricalDataPoint Category="Apple" Value="20"/>
-                        <telerik:CategoricalDataPoint Category="Mango" Value="30"/>
-                        <telerik:CategoricalDataPoint Category="Banana" Value="60"/>
-                        <telerik:CategoricalDataPoint Category="Pineapple" Value="10"/>
-                    </telerik:AreaSeries.DataPoints>
-                </telerik:AreaSeries>
-            </telerik:RadCartesianChart.Series>
+            <telerik:RadCartesianChart.Annotations>
+                <telerik:CartesianGridLineAnnotation Axis="{Binding ElementName=VerticalAxis}"
+                                                     Value="6" 
+                                                     Stroke="Red" 
+                                                     StrokeThickness="1"/>
+                <telerik:CartesianGridLineAnnotation Axis="{Binding ElementName=HorizontalAxis}"
+                                                     Value="3" 
+                                                     Stroke="Blue" 
+                                                     StrokeThickness="1"/>
+
+            </telerik:RadCartesianChart.Annotations>
 
             <!--Data-->
 
@@ -75,7 +89,6 @@
             <telerik:RadCartesianChart.Grid>
                 <telerik:CartesianChartGrid MajorLinesVisibility="XY"/>
             </telerik:RadCartesianChart.Grid>
-
             <!-- Behaviors -->
             <telerik:RadCartesianChart.Behaviors>
                 <telerik:ChartPanAndZoomBehavior ZoomMode="Both" />

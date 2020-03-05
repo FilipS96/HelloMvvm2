@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HelloMvvm2.Domain.RandomView"
-             xmlns:chartView="clr-namespace:HelloMvvm2.Domain.RandomViewGraph"
+             xmlns:randomViewChart="clr-namespace:HelloMvvm2.Domain.RandomViewChart"
              DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RandomViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
@@ -383,7 +383,8 @@
 
         <Grid Grid.Row="1"
               Grid.Column="1">
-           <chartView:RandomViewGraphView></chartView:RandomViewGraphView>
+            <randomViewChart:RandomViewChartView Margin="5"
+                                                 RandomChartModels="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
         </Grid>
 
     </Grid>

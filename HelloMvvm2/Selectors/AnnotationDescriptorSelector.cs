@@ -13,19 +13,19 @@ namespace HelloMvvm2.Selectors
 
         public ChartAnnotationDescriptor UnbalancedPolarAxisGridLineAnnotationDescriptor { get; set; }
 
-        public override ChartAnnotationDescriptor SelectDescriptor(ChartAnnotationsProvider provider, object context)
-        {
-            switch (context)
-            {
-                case MeasureZoneAnnotation _:
-                    return this.MarkedZoneAnnotationDescriptor;
-                case RecipePlotBandAnnotation _:
-                    return this.RecipePlotAnnotationBandDescriptor;
-                case UnbalancedPolarAxisGridLineAnnotation _:
-                    return this.UnbalancedPolarAxisGridLineAnnotationDescriptor;
-                default:
-                    return base.SelectDescriptor(provider, context);
-            }
-        }
+        //public override ChartAnnotationDescriptor SelectDescriptor(ChartAnnotationsProvider provider, object context)
+        //{
+        //    switch (context)
+        //    {
+        //        case MeasureZoneAnnotation _:
+        //            return this.MarkedZoneAnnotationDescriptor;
+        //        case RecipePlotBandAnnotation _:
+        //            return this.RecipePlotAnnotationBandDescriptor;
+        //        case UnbalancedPolarAxisGridLineAnnotation _:
+        //            return this.UnbalancedPolarAxisGridLineAnnotationDescriptor;
+        //        default:
+        //            return base.SelectDescriptor(provider, context);
+        //    }
+        //}
     }
 }

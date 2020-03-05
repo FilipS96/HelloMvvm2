@@ -16,6 +16,7 @@ namespace HelloMvvm2.Domain.RandomView
         public static readonly DependencyProperty RandomViewModelProperty =
             DependencyProperty.Register("RandomModels", typeof(ObservableCollection<RandomModel>), typeof(RandomView),
                 new PropertyMetadata(RandomModelsPropertyChanged));
+
         public RandomView()
         {
             InitializeComponent();
@@ -57,7 +58,6 @@ namespace HelloMvvm2.Domain.RandomView
                 return;
             }
         }
-
         public void OnUnloaded(object sender, RoutedEventArgs e)
         {
             try

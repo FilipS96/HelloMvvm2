@@ -1,4 +1,4 @@
-﻿namespace HelloMvvm2.Domain.RandomViewGraph
+﻿namespace HelloMvvm2.Domain.RandomViewChart
 {
     public interface IRandomViewChartViewModel : IViewModel
     {
