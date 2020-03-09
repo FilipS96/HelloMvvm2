@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HelloMvvm2.Domain.RandomViewChart"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewChartView}"
-             d:DataContext="{d:DesignInstance Type=local:RandomViewChartView, IsDesignTimeCreatable=True}"
+             DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewChartViewModel}"
+             d:DataContext="{d:DesignInstance Type=local:RandomViewChartViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -36,7 +36,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="test1"
+                        <!--<TextBlock Text="test1"
                                    Grid.Row="0"
                                    Grid.Column="0"/>
                         <TextBlock Text="test2"
@@ -47,7 +47,7 @@
                                    Grid.Column="0"/>
                         <TextBlock Text="test4"
                                    Grid.Row="1"
-                                   Grid.Column="1"/>
+                                   Grid.Column="1"/>-->
                     </Grid>
                 </DataTemplate>
             </telerik:RadCartesianChart.Resources>
@@ -69,7 +69,7 @@
             </telerik:RadCartesianChart.HorizontalAxis>
 
             <!--Annotations-->
-            <telerik:RadCartesianChart.Annotations>
+            <!--<telerik:RadCartesianChart.Annotations>
                 <telerik:CartesianGridLineAnnotation Axis="{Binding ElementName=VerticalAxis}"
                                                      Value="6" 
                                                      Stroke="Red" 
@@ -78,17 +78,48 @@
                                                      Value="3" 
                                                      Stroke="Blue" 
                                                      StrokeThickness="1"/>
-
-            </telerik:RadCartesianChart.Annotations>
+            </telerik:RadCartesianChart.Annotations>-->
 
             <!--Data-->
-
+            <telerik:RadCartesianChart.SeriesProvider>
+                <telerik:ChartSeriesProvider Source="{Binding DpModel}">
+                    <telerik:CategoricalSeriesDescriptor ItemsSourcePath="DataPoint">
+                        <telerik:CategoricalSeriesDescriptor.Style>
+                            <Style TargetType="telerik:LineSeries">
+                                <Setter Property="Stroke" Value="GreenYellow" />
+                                <Setter Property="StrokeThickness" Value="2"/> 
+                            </Style>
+                        </telerik:CategoricalSeriesDescriptor.Style>
+                    </telerik:CategoricalSeriesDescriptor>
+                </telerik:ChartSeriesProvider>
+            </telerik:RadCartesianChart.SeriesProvider>
+            <!--<telerik:LineSeries ItemsSource="{Binding DpModel.DataPoint}">
+                <telerik:LineSeries.DataPoints>
+                    <telerik:CategoricalDataPoint Value="10"  />
+                    <telerik:CategoricalDataPoint Value="30" />
+                    <telerik:CategoricalDataPoint Value="20" />
+                    <telerik:CategoricalDataPoint Value="25" />
+                    <telerik:CategoricalDataPoint Value="10" />
+                </telerik:LineSeries.DataPoints>
+            </telerik:LineSeries>-->
 
 
             <!-- Grid area -->
             <telerik:RadCartesianChart.Grid>
-                <telerik:CartesianChartGrid MajorLinesVisibility="XY"/>
+                <telerik:CartesianChartGrid MajorLinesVisibility="XY" StripLinesVisibility="XY">
+                    <telerik:CartesianChartGrid.MajorXLineStyle>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Red"/> 
+                        </Style>
+                    </telerik:CartesianChartGrid.MajorXLineStyle>
+                    <telerik:CartesianChartGrid.MajorYLineStyle>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Blue"/>
+                        </Style>
+                    </telerik:CartesianChartGrid.MajorYLineStyle>
+                </telerik:CartesianChartGrid>
             </telerik:RadCartesianChart.Grid>
+
             <!-- Behaviors -->
             <telerik:RadCartesianChart.Behaviors>
                 <telerik:ChartPanAndZoomBehavior ZoomMode="Both" />

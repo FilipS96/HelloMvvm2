@@ -15,7 +15,7 @@ namespace HelloMvvm2.Domain
             CarViewModel = new CarViewModel();
             CarModifierViewModel = new CarModifierViewModel();
             RandomViewModel = new RandomViewModel();
-            RandomViewChartView = new RandomViewChartViewModel();
+            RandomViewChartViewModel = new RandomViewChartViewModel();
         }
 
         public IMainViewModel MainViewModel { get; set; }
@@ -26,7 +26,7 @@ namespace HelloMvvm2.Domain
 
         public IRandomViewModel RandomViewModel { get; set; }
 
-        public IRandomViewChartViewModel RandomViewChartView { get; set; }
+        public IRandomViewChartViewModel RandomViewChartViewModel { get; set; }
 
     }
 }
