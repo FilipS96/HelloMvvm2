@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HelloMvvm2.Domain.Models.Charts;
+using HelloMvvm2.Enums;
 using Telerik.Windows.Controls.ChartView;
 
 namespace HelloMvvm2.Selectors
@@ -11,19 +10,19 @@ namespace HelloMvvm2.Selectors
 
         public ChartSeriesDescriptor PointSeriesDescriptor { get; set; }
 
-        //public override ChartSeriesDescriptor SelectDescriptor(ChartSeriesProvider provider, object context)
-        //{
-        //    var seriesModel = (TestRunSeries)context;
+        public override ChartSeriesDescriptor SelectDescriptor(ChartSeriesProvider provider, object context)
+        {
+            var seriesModel = (TestSeries)context;
 
-        //    switch (seriesModel.SeriesType)
-        //    {
-        //        case SeriesTypeEnum.Line:
-        //            return CategoricalSeriesDescriptor;
-        //        case SeriesTypeEnum.Point:
-        //            return PointSeriesDescriptor;
-        //        default:
-        //            return CategoricalSeriesDescriptor;
-        //    }
-        //}
+            switch (seriesModel.SeriesType)
+            {
+                case SeriesTypeEnum.Line:
+                    return CategoricalSeriesDescriptor;
+                case SeriesTypeEnum.Point:
+                    return PointSeriesDescriptor;
+                default:
+                    return CategoricalSeriesDescriptor;
+            }
+        }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using HelloMvvm2.Base;
+﻿using HelloMvvm2.Base;
 
-namespace HelloMvvm2.Domain.Models
+namespace HelloMvvm2.Domain.Models.Charts
 {
     public class RandomChartModel : ViewModelBase
     {

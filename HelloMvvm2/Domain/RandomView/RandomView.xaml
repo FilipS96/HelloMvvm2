@@ -384,7 +384,7 @@
         <Grid Grid.Row="1"
               Grid.Column="1">
             <randomViewChart:RandomViewChartView Margin="5"
-                                                 RandomChartModels="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                                 TestSeries="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
         </Grid>
 
     </Grid>

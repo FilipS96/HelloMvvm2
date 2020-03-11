@@ -20,7 +20,7 @@ namespace HelloMvvm2.Domain.RandomView
         private ObservableCollection<ListModel> _myListModels;
         private ObservableCollection<RandomModel> _myRandomModels;
 
-        public RandomModel _rndModel;
+        private RandomModel _rndModel;
 
         [DesignOnly(true)]
         public RandomViewModel()

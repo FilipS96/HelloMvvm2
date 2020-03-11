@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HelloMvvm2.Domain.RandomViewChart"
+             xmlns:selectors1="clr-namespace:HelloMvvm2.Selectors"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewChartViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RandomViewChartViewModel, IsDesignTimeCreatable=True}"
@@ -21,7 +22,7 @@
         <telerik:RadCartesianChart Grid.Column="0"
                                    Grid.Row="0"
                                    Grid.RowSpan="2"
-                                   x:Name="testChart"
+                                   x:Name="TestChart"
                                    Background="White"
                                    Margin="0">
             <!-- Resources -->
@@ -35,7 +36,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions> <!--Vad gör denna grid & textblocks?-->
                         <!--<TextBlock Text="test1"
                                    Grid.Row="0"
                                    Grid.Column="0"/>
@@ -55,53 +56,73 @@
             <!--Vertical Axis-->
             <telerik:RadCartesianChart.VerticalAxis>
                 <telerik:LinearAxis x:Name="VerticalAxis"
-                                    Title="Vertical Axis"
-                                    SmartLabelsMode="SmartStep"/>
+                                    SmartLabelsMode="SmartStep">
+                    <telerik:LinearAxis.Style>
+                        <Style TargetType="telerik:LinearAxis">
+                            <Setter Property="Title" Value="Height"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Style>
+                    </telerik:LinearAxis.Style>
+                </telerik:LinearAxis>
             </telerik:RadCartesianChart.VerticalAxis>
 
             <!--Horizontal Axis-->
             <telerik:RadCartesianChart.HorizontalAxis>
-                <telerik:CategoricalAxis x:Name="HorizontalAxis"
-                                         SmartLabelsMode="SmartStep"
-                                         Title="Horizontal Axis"
+                <telerik:CategoricalAxis SmartLabelsMode="SmartStep"
                                          PlotMode="OnTicks"
-                                         LastLabelVisibility="Clip"/>
+                                         LastLabelVisibility="Clip"
+                                         Title="Value"
+                                         FontSize="14"
+                                         FontWeight="Bold"/>
             </telerik:RadCartesianChart.HorizontalAxis>
 
             <!--Annotations-->
-            <!--<telerik:RadCartesianChart.Annotations>
-                <telerik:CartesianGridLineAnnotation Axis="{Binding ElementName=VerticalAxis}"
-                                                     Value="6" 
-                                                     Stroke="Red" 
-                                                     StrokeThickness="1"/>
-                <telerik:CartesianGridLineAnnotation Axis="{Binding ElementName=HorizontalAxis}"
-                                                     Value="3" 
-                                                     Stroke="Blue" 
-                                                     StrokeThickness="1"/>
-            </telerik:RadCartesianChart.Annotations>-->
-
+            
             <!--Data-->
             <telerik:RadCartesianChart.SeriesProvider>
-                <telerik:ChartSeriesProvider Source="{Binding DpModel}">
-                    <telerik:CategoricalSeriesDescriptor ItemsSourcePath="DataPoint">
-                        <telerik:CategoricalSeriesDescriptor.Style>
-                            <Style TargetType="telerik:LineSeries">
-                                <Setter Property="Stroke" Value="GreenYellow" />
-                                <Setter Property="StrokeThickness" Value="2"/> 
-                            </Style>
-                        </telerik:CategoricalSeriesDescriptor.Style>
-                    </telerik:CategoricalSeriesDescriptor>
+                <telerik:ChartSeriesProvider Source="{Binding TestSeriesOc}">
+                    <telerik:ChartSeriesProvider.SeriesDescriptorSelector>
+                        <selectors1:SeriesDescriptorSelector>
+
+                            <!--Line-->
+                            <selectors1:SeriesDescriptorSelector.CategoricalSeriesDescriptor>
+                                <telerik:CategoricalSeriesDescriptor CategoryPath="Point"
+                                                                     ValuePath="Height"
+                                                                     ItemsSourcePath="Data">
+                                    <telerik:CategoricalSeriesDescriptor.Style>
+                                        <Style TargetType="telerik:LineSeries">
+                                            <Setter Property="Stroke" Value="Red"/>
+                                            <Setter Property="StrokeThickness" Value="2"/>
+                                        </Style>
+                                    </telerik:CategoricalSeriesDescriptor.Style>
+                                </telerik:CategoricalSeriesDescriptor>
+                            </selectors1:SeriesDescriptorSelector.CategoricalSeriesDescriptor>
+
+                            <!--two-->
+                            <!--<selectors1:SeriesDescriptorSelector.PointSeriesDescriptor>
+                                <telerik:CategoricalSeriesDescriptor CategoryPath=""
+                                                                     ValuePath=""
+                                                                     ItemsSourcePath="">
+                                    <telerik:CategoricalSeriesDescriptor.Style>
+                                        <Style TargetType="telerik:PointSeries">
+                                            <Setter Property="DefaultVisualStyle">
+                                                <Setter.Value>
+                                                    <Style TargetType="Path">
+                                                        <Setter Property="Stroke" Value="GreenYellow"/>
+                                                        <Setter Property="StrokeThickness" Value="10"/>
+                                                    </Style>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </telerik:CategoricalSeriesDescriptor.Style>
+                                </telerik:CategoricalSeriesDescriptor>
+                            </selectors1:SeriesDescriptorSelector.PointSeriesDescriptor>-->
+
+                        </selectors1:SeriesDescriptorSelector>
+                    </telerik:ChartSeriesProvider.SeriesDescriptorSelector>
                 </telerik:ChartSeriesProvider>
             </telerik:RadCartesianChart.SeriesProvider>
-            <!--<telerik:LineSeries ItemsSource="{Binding DpModel.DataPoint}">
-                <telerik:LineSeries.DataPoints>
-                    <telerik:CategoricalDataPoint Value="10"  />
-                    <telerik:CategoricalDataPoint Value="30" />
-                    <telerik:CategoricalDataPoint Value="20" />
-                    <telerik:CategoricalDataPoint Value="25" />
-                    <telerik:CategoricalDataPoint Value="10" />
-                </telerik:LineSeries.DataPoints>
-            </telerik:LineSeries>-->
 
 
             <!-- Grid area -->

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using HelloMvvm2.Base;
-using HelloMvvm2.Domain.Models;
+using HelloMvvm2.Domain.Models.Charts;
 
 namespace HelloMvvm2.Domain.RandomViewChart
 {
@@ -13,9 +13,9 @@ namespace HelloMvvm2.Domain.RandomViewChart
     /// </summary>
     public partial class RandomViewChartView : UserControl, IUserControl
     {
-        public static readonly DependencyProperty RandomChartViewModelProperty =
-            DependencyProperty.Register("RandomChartModels", typeof(ObservableCollection<RandomChartModel>), typeof(RandomViewChartView),
-                new PropertyMetadata(RandomChartModelsPropertyChanged));
+        public static readonly DependencyProperty TestSeriesProperty =
+            DependencyProperty.Register("TestSeries", typeof(ObservableCollection<TestSeries>), typeof(RandomViewChartView),
+                new PropertyMetadata(TestSeriesPropertyChanged));
 
         public RandomViewChartView()
         {
@@ -25,26 +25,25 @@ namespace HelloMvvm2.Domain.RandomViewChart
             this.Unloaded += OnUnloaded;
         }
 
-        public ObservableCollection<RandomChartModel> RandomChartModels
+        public ObservableCollection<TestSeries> TestSeries
         {
-            get => (ObservableCollection<RandomChartModel>)GetValue(RandomChartViewModelProperty);
-            set => SetValue(RandomChartViewModelProperty, value);
+            get => (ObservableCollection<TestSeries>)GetValue(TestSeriesProperty);
+            set => SetValue(TestSeriesProperty, value);
         }
 
-        private static void RandomChartModelsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void TestSeriesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue != null)
             {
-                var randomChartModels = (ObservableCollection<RandomChartModel>)e.NewValue;
-                ((RandomViewChartViewModel)((RandomViewChartView)d).DataContext).RandomChartModels = randomChartModels;
-                ((RandomViewChartViewModel)((RandomViewChartView)d).DataContext).RandomChartModels.CollectionChanged += RandomChartModelsCollectionChanged;
+                var testSeriesOc = (ObservableCollection<TestSeries>)e.NewValue;
+                ((RandomViewChartViewModel)((RandomViewChartView)d).DataContext).TestSeriesOc = testSeriesOc;
+                ((RandomViewChartViewModel)((RandomViewChartView)d).DataContext).TestSeriesOc.CollectionChanged += RandomChartModelsCollectionChanged;
             }
         }
 
         private static void RandomChartModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
         }
-
 
         public void OnLoaded(object sender, RoutedEventArgs e)
         {
