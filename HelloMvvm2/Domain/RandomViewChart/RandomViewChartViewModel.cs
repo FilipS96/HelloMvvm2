@@ -34,15 +34,15 @@ namespace HelloMvvm2.Domain.RandomViewChart
                     new ObservableCollection<TestSeriesData>
                     {
                         TestSeriesData.Create(1, 5, 0),
-                        TestSeriesData.Create(2, 10, 100),
-                        TestSeriesData.Create(3, 15, 100),
-                        TestSeriesData.Create(4, 20, 100),
-                        TestSeriesData.Create(5, 25, 100),
-                        TestSeriesData.Create(6, 30, 100),
-                        TestSeriesData.Create(7, 35, 100),
-                        TestSeriesData.Create(8, 40, 100),
-                        TestSeriesData.Create(9, 45, 100),
-                        TestSeriesData.Create(10, 50,100)
+                        TestSeriesData.Create(2, 10, 10),
+                        TestSeriesData.Create(3, 15, 15),
+                        TestSeriesData.Create(4, 20, 25),
+                        TestSeriesData.Create(5, 25, 28),
+                        TestSeriesData.Create(6, 30, 36),
+                        TestSeriesData.Create(7, 35, 64),
+                        TestSeriesData.Create(8, 40, 70),
+                        TestSeriesData.Create(9, 45, 78),
+                        TestSeriesData.Create(10, 50,96)
                     })
             };
             TestSerieData = new TestSeriesData();

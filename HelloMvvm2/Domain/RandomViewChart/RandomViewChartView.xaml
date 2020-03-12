@@ -9,8 +9,8 @@
              DataContext="{Binding Source={StaticResource Locator}, Path=RandomViewChartViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RandomViewChartViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Background="AntiqueWhite">
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -124,7 +124,6 @@
                 </telerik:ChartSeriesProvider>
             </telerik:RadCartesianChart.SeriesProvider>
 
-
             <!-- Grid area -->
             <telerik:RadCartesianChart.Grid>
                 <telerik:CartesianChartGrid MajorLinesVisibility="XY" StripLinesVisibility="XY">
@@ -149,5 +148,41 @@
 
         </telerik:RadCartesianChart>
 
+        <Grid Grid.Row="0"
+              Grid.Column="1"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="2"
+                       Text="Add a data point"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"/>
+            <Button Grid.Row="0" 
+                    Grid.Column="0" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Padding="5">
+                <TextBlock TextAlignment="Center">
+                    <Run Text="Add"/>
+                    <LineBreak/>
+                    <Run Text="Data Point"/>
+                </TextBlock>
+            </Button>
+
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Width="60"
+                     Height="30"/>
+        </Grid>
     </Grid>
 </UserControl>
