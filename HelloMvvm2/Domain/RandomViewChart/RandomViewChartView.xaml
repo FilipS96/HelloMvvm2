@@ -78,7 +78,27 @@
             </telerik:RadCartesianChart.HorizontalAxis>
 
             <!--Annotations-->
-            
+            <!--<telerik:RadCartesianChart.AnnotationsProvider>
+                <telerik:ChartAnnotationsProvider Source="{Binding Mode=OneWay}">
+                    <telerik:ChartAnnotationsProvider.AnnotationDescriptorSelector>
+                        <selectors1:AnnotationsDescriptorSelector>
+
+                            <selectors1:AnnotationsDescriptorSelector.RecipePlotAnnotationBandDescriptor>
+                                <telerik:ChartAnnotationDescriptor>
+                                    <telerik:ChartAnnotationDescriptor.Style>
+                                        <Style TargetType="telerik:CartesianPlotBandAnnotation">
+                                            <Setter Property="Axis" Value="{Binding }" />
+                                            <Setter Property="Fill" Value="Blue"/>
+                                            
+                                        </Style>
+                                    </telerik:ChartAnnotationDescriptor.Style>
+                                </telerik:ChartAnnotationDescriptor>
+                            </selectors1:AnnotationsDescriptorSelector.RecipePlotAnnotationBandDescriptor>
+                        </selectors1:AnnotationsDescriptorSelector>
+                    </telerik:ChartAnnotationsProvider.AnnotationDescriptorSelector>
+                </telerik:ChartAnnotationsProvider>
+            </telerik:RadCartesianChart.AnnotationsProvider>-->
+
             <!--Data-->
             <telerik:RadCartesianChart.SeriesProvider>
                 <telerik:ChartSeriesProvider Source="{Binding TestSeriesOc}">
@@ -99,17 +119,17 @@
                                 </telerik:CategoricalSeriesDescriptor>
                             </selectors1:SeriesDescriptorSelector.CategoricalSeriesDescriptor>
 
-                            <!--two-->
-                            <!--<selectors1:SeriesDescriptorSelector.PointSeriesDescriptor>
-                                <telerik:CategoricalSeriesDescriptor CategoryPath=""
-                                                                     ValuePath=""
-                                                                     ItemsSourcePath="">
+                            <!--Point-->
+                            <selectors1:SeriesDescriptorSelector.PointSeriesDescriptor>
+                                <telerik:CategoricalSeriesDescriptor CategoryPath="Point"
+                                                                     ValuePath="Height"
+                                                                     ItemsSourcePath="Data">
                                     <telerik:CategoricalSeriesDescriptor.Style>
                                         <Style TargetType="telerik:PointSeries">
                                             <Setter Property="DefaultVisualStyle">
                                                 <Setter.Value>
                                                     <Style TargetType="Path">
-                                                        <Setter Property="Stroke" Value="GreenYellow"/>
+                                                        <Setter Property="Stroke" Value="Blue"/>
                                                         <Setter Property="StrokeThickness" Value="10"/>
                                                     </Style>
                                                 </Setter.Value>
@@ -117,7 +137,7 @@
                                         </Style>
                                     </telerik:CategoricalSeriesDescriptor.Style>
                                 </telerik:CategoricalSeriesDescriptor>
-                            </selectors1:SeriesDescriptorSelector.PointSeriesDescriptor>-->
+                            </selectors1:SeriesDescriptorSelector.PointSeriesDescriptor>
 
                         </selectors1:SeriesDescriptorSelector>
                     </telerik:ChartSeriesProvider.SeriesDescriptorSelector>
@@ -129,12 +149,12 @@
                 <telerik:CartesianChartGrid MajorLinesVisibility="XY" StripLinesVisibility="XY">
                     <telerik:CartesianChartGrid.MajorXLineStyle>
                         <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Red"/> 
+                            <Setter Property="Stroke" Value="Gray"/> 
                         </Style>
                     </telerik:CartesianChartGrid.MajorXLineStyle>
                     <telerik:CartesianChartGrid.MajorYLineStyle>
                         <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Blue"/>
+                            <Setter Property="Stroke" Value="Gray"/>
                         </Style>
                     </telerik:CartesianChartGrid.MajorYLineStyle>
                 </telerik:CartesianChartGrid>
@@ -165,11 +185,14 @@
                        FontSize="16"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"/>
+
             <Button Grid.Row="0" 
                     Grid.Column="0" 
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Padding="5">
+                    Padding="5"
+                    Command="{Binding DataContext.ButtonCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                    CommandParameter="{Binding}">
                 <TextBlock TextAlignment="Center">
                     <Run Text="Add"/>
                     <LineBreak/>

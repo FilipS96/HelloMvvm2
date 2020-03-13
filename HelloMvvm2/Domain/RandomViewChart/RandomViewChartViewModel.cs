@@ -25,6 +25,7 @@ namespace HelloMvvm2.Domain.RandomViewChart
         [DesignOnly(true)]
         public RandomViewChartViewModel()
         {
+            Rnd = new Random();
             DpModel = new DataPointModel();
             DpModels = new ObservableCollection<DataPointModel>();
             TestSerie = new TestSeries();
@@ -33,24 +34,40 @@ namespace HelloMvvm2.Domain.RandomViewChart
                 TestSeries.Create(SeriesTypeEnum.Line,
                     new ObservableCollection<TestSeriesData>
                     {
-                        TestSeriesData.Create(1, 5, 0),
-                        TestSeriesData.Create(2, 10, 10),
-                        TestSeriesData.Create(3, 15, 15),
-                        TestSeriesData.Create(4, 20, 25),
-                        TestSeriesData.Create(5, 25, 28),
-                        TestSeriesData.Create(6, 30, 36),
-                        TestSeriesData.Create(7, 35, 64),
-                        TestSeriesData.Create(8, 40, 70),
-                        TestSeriesData.Create(9, 45, 78),
-                        TestSeriesData.Create(10, 50,96)
-                    })
+                        TestSeriesData.Create(1, 5,   Rnd.Next(0,100)),
+                        TestSeriesData.Create(2, 10,  20),
+                        TestSeriesData.Create(3, 15,  Rnd.Next(0,100)),
+                        TestSeriesData.Create(4, 20,  35),
+                        TestSeriesData.Create(5, 25,  Rnd.Next(0,100)),
+                        TestSeriesData.Create(6, 30,  Rnd.Next(0,100)),
+                        TestSeriesData.Create(7, 35,  65),
+                        TestSeriesData.Create(8, 40,  Rnd.Next(0,100)),
+                        TestSeriesData.Create(9, 45,  Rnd.Next(0,100)),
+                        TestSeriesData.Create(10, 50, Rnd.Next(0,100))
+                    }),
+            TestSeries.Create(SeriesTypeEnum.Point,
+                new ObservableCollection<TestSeriesData>
+                {
+                    TestSeriesData.Create(4, 20, 35)
+                }),
+            TestSeries.Create(SeriesTypeEnum.Point,
+                new ObservableCollection<TestSeriesData>
+                {
+                    TestSeriesData.Create(7, 35, 65)
+                })
             };
+
+
             TestSerieData = new TestSeriesData();
             TestSeriesDataOc = new ObservableItemCollection<TestSeriesData>();
 
+            ButtonCommand = new DelegateCommand(ButtonExecuted);
         }
 
-        
+
+        public DelegateCommand ButtonCommand { get; set; }
+
+
         public Random Rnd
         {
             get => _rnd;
@@ -68,11 +85,6 @@ namespace HelloMvvm2.Domain.RandomViewChart
             set => SetProperty(ref _dpModels, value);
         }
 
-        //public ObservableCollection<RandomChartModel> RandomChartModels
-        //{
-        //    get => _randomChartModels;
-        //    set => SetProperty(ref _randomChartModels, value);
-        //}
 
         public TestSeries TestSerie
         {
@@ -95,6 +107,17 @@ namespace HelloMvvm2.Domain.RandomViewChart
             get => _testSeriesDataOc;
             set => SetProperty(ref _testSeriesDataOc, value);
         }
+
+        private void ButtonExecuted(object obj)
+        {
+            TestSeriesOc.Add(
+                TestSeries.Create(SeriesTypeEnum.Point,
+                    new ObservableCollection<TestSeriesData>
+                    {
+                        TestSeriesData.Create(2, 10, 20) //Denna ska lägga till värdet som är angivet i textbox. 
+                    }));
+        }
+
 
         public Task Loaded()
         {

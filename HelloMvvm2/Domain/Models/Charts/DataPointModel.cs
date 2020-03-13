@@ -1,5 +1,4 @@
 ﻿using HelloMvvm2.Base;
-using HelloMvvm2.Enums;
 
 namespace HelloMvvm2.Domain.Models.Charts
 {
