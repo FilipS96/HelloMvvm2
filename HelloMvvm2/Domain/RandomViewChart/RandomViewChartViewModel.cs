@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using HelloMvvm2.Base;
 using HelloMvvm2.Domain.Models.Charts;
@@ -11,6 +12,8 @@ namespace HelloMvvm2.Domain.RandomViewChart
 {
     public class RandomViewChartViewModel : ViewModelBase, IRandomViewChartViewModel
     {
+        private int _dataPointValue;
+
         private Random _rnd;
         private DataPointModel _dpModel;
         private ObservableCollection<DataPointModel> _dpModels;
@@ -68,6 +71,12 @@ namespace HelloMvvm2.Domain.RandomViewChart
         public DelegateCommand ButtonCommand { get; set; }
 
 
+        public int DataPointValue
+        {
+            get => _dataPointValue;
+            set => SetProperty(ref _dataPointValue, value);
+        }
+
         public Random Rnd
         {
             get => _rnd;
@@ -110,12 +119,15 @@ namespace HelloMvvm2.Domain.RandomViewChart
 
         private void ButtonExecuted(object obj)
         {
+            var test = TestSerieData // gör .where .first för o hitta rätt punkt att sätta ut datapoint på.
+
             TestSeriesOc.Add(
                 TestSeries.Create(SeriesTypeEnum.Point,
                     new ObservableCollection<TestSeriesData>
                     {
                         TestSeriesData.Create(2, 10, 20) //Denna ska lägga till värdet som är angivet i textbox. 
-                    }));
+                    })
+                );
         }
 
 
